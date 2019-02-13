@@ -17,7 +17,6 @@ class App extends React.Component {
 
   changeHandler = event => {
     this.setState({ inputText: event.target.value });
-    console.log(event.currentTarget);
   };
 
   addNewItem = event => {
@@ -39,15 +38,15 @@ class App extends React.Component {
       backgroundColor: this.state.todoList.backgroundColor
     };
   };
-  
+
   clearCompleted = event => {
     event.preventDefault();
     this.setState({
       todoList: this.state.todoList,
-      completedTodoList: [ ],
+      completedTodoList: [],
       inputText: "",
       newTask: ""
-    })
+    });
   };
 
   completeTask = (event, id) => {
@@ -55,7 +54,7 @@ class App extends React.Component {
     thisTask[0].completed = !thisTask[0].completed;
     let otherTasks = this.state.todoList.filter(item => item.id !== id);
     let completedTasks = this.state.completedTodoList;
-    console.log(event.target.style.color)
+    console.log(event.target.style.color);
     this.setState({
       todoList: [...otherTasks],
       completedTodoList: [...completedTasks, thisTask[0]],
@@ -67,9 +66,11 @@ class App extends React.Component {
   unCompleteTask = (event, id) => {
     let thisTask = this.state.completedTodoList.filter(item => item.id === id);
     thisTask[0].completed = !thisTask[0].completed;
-    let otherTasks = this.state.completedTodoList.filter(item => item.id !== id);
+    let otherTasks = this.state.completedTodoList.filter(
+      item => item.id !== id
+    );
     let uncompletedTasks = this.state.todoList;
-    console.log(event.target.style.color)
+    console.log(event.target.style.color);
 
     this.setState({
       todoList: [...uncompletedTasks, thisTask[0]],
@@ -78,7 +79,6 @@ class App extends React.Component {
       newTask: ""
     });
   };
-
 
   getRandomColor() {
     const numbers = "0123456789ABCDEF";
@@ -93,7 +93,7 @@ class App extends React.Component {
     return (
       <div className="todoListContainer">
         <div className="lists">
-        <h1>Finished Tasks</h1>
+          <h1>Finished Tasks</h1>
           <FinTodoList
             finTodoList={this.state.completedTodoList}
             unCompleteTask={this.unCompleteTask}
@@ -118,6 +118,5 @@ class App extends React.Component {
     );
   }
 }
-
 
 export default App;
